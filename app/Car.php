@@ -21,14 +21,53 @@ class Car extends Model
         ];
 
 
-    static function getCars() {
-        return self::all();
-    }
+    // static function paginator() {
+    //     $request = new Request();
+    //     $take = request($_GET['take']);
+    //     $skip = request($_GET['skip']);
+    //     dd($take);
+    //     if($skip && $take){
+    //         $cars =  self::all();
+    //         $cars = array_slice($cars, $skip);
+    //         for($i=0; $i<$take; $i++) {
+    //             $cars[] = $car;
+    //         }    
+    //         return $cars;
+    //    }
+    //    $cars = self::all();
+    // }
 
+    // static function getCars() {
+    //     return self::all();
+    // }
+
+
+
+
+    static function getCars() {        
+
+        if(isset($_GET['take']) && isset($_GET['skip'])) {
+            $take = (integer)$_GET['take'];
+            $skip = (integer)$_GET['skip'];
+            $cars[] =  self::all();
+            foreach ($cars[0] as $car) {
+                $allCars[] = $car;
+            }
+            // // izbacuje prvih 5 iz liste i krece od 6. u listi
+            // $allCars = array_slice($allCars, $skip);
+                        
+            // $allCars = array_slice($allCars, 0, $take);
+            
+            // kraca verija
+            $allCars = array_slice((array_slice($allCars, $skip)), 0, $take);
+            // dd($allCars);    
+            return $allCars;
+       }
+       return self::all();
+    }
 
     // mutator - kad boolean bude stizao u bazu
     public function setIsAutomaticAttribute($value){
     	$this->attributes['is_automatic'] = (boolean)$value;
-
     }
 }
