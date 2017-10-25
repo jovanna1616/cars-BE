@@ -8,17 +8,16 @@ class Car extends Model
 {
     protected $guarded = ['id'];
     protected $fillable = ['mark', 'model', 'year', 'max_speed', 'is_automatic', 'engine', 'number_of_doors'];
-    // protected $casts = ['is_automatic' => 'boolean'];
 
 
     const STORE_RULES = [
-            'mark' => 'required',
-            'model' => 'required',
+            'mark' => 'required | min:2',
+            'model' => 'required | min:2',
             'year' => 'required',
-            'max_speed' => 'required',
+            'max_speed' => 'required | min:1',
             'is_automatic' => 'required',
             'engine' => 'required',
-            'number_of_doors' => 'required'
+            'number_of_doors' => 'required | min:1'
         ];
 
 

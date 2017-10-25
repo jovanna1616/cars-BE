@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Validator;
 
 class CarController extends Controller
 {
@@ -37,13 +38,20 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {   
+        $car = new Car();
+        // dd($request->all());
         $rules = Car::STORE_RULES;
-        
         $request->validate($rules);
+
+        $car->mark = $request->input('mark');
+        $car->model = $request->input('model');
+        $car->year = $request->input('year');
+        $car->max_speed = $request->input('max_speed');
+        $car->is_automatic = $request->input('is_automatic');
+        $car->engine = $request->input('engine');
+        $car->number_of_doors = $request->input('number_of_doors');
+
         
-        $car = Car::create($request->all());
-
-
         $car->save();
         return $car;
 
@@ -81,8 +89,9 @@ class CarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $car = Car::findOrFail($id);
+        $rules = Car::STORE_RULES;
 
         $car->mark = $request->input('mark');
         $car->model = $request->input('model');
@@ -92,7 +101,11 @@ class CarController extends Controller
         $car->engine = $request->input('engine');
         $car->number_of_doors = $request->input('number_of_doors');
 
+        
 
+        
+        $request->validate($rules);
+        dd($car);
         $car->save();
 
         return $car;

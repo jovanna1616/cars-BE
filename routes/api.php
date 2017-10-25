@@ -23,7 +23,7 @@ Route::middleware('api')->group(function () {
 	// index
 	Route::get('/cars', 'CarController@index');
 	// store
-	Route::post('/cars', 'CarController@store');
+	Route::get('/cars', 'CarController@store');
 	// show
 	Route::get('/cars/{id}', 'CarController@show');
 	// update
