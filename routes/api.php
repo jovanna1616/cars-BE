@@ -16,19 +16,28 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// index
+Route::middleware('api')->get('/cars', 'CarController@index');
+// store
+Route::middleware('api')->post('/cars', 'CarController@store');
+// show
+Route::middleware('api')->get('/cars/{id}', 'CarController@show');
+// update
+Route::middleware('api')->put('/cars/{id}', 'CarController@update');
+// delete
+Route::middleware('api')->delete('/cars/{id}', 'CarController@destroy');
 
 
+// Route::middleware('api')->group(function () {
+// 	// index
+// 	Route::get('/cars', 'CarController@index');
+// 	// store
+// 	Route::get('/cars', 'CarController@store');
+// 	// show
+// 	Route::get('/cars/{id}', 'CarController@show');
+// 	// update
+// 	Route::put('/cars/{id}', 'CarController@update');
+// 	// delete
+// 	Route::delete('/cars/{id}', 'CarController@destroy');
 
-Route::middleware('api')->group(function () {
-	// index
-	Route::get('/cars', 'CarController@index');
-	// store
-	Route::get('/cars', 'CarController@store');
-	// show
-	Route::get('/cars/{id}', 'CarController@show');
-	// update
-	Route::put('/cars/{id}', 'CarController@update');
-	// delete
-	Route::delete('/cars/{id}', 'CarController@destroy');
-
-});
+// });

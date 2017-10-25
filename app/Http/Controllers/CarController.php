@@ -39,7 +39,6 @@ class CarController extends Controller
     public function store(Request $request)
     {   
         $car = new Car();
-        // dd($request->all());
         $rules = Car::STORE_RULES;
         $request->validate($rules);
 
@@ -50,7 +49,6 @@ class CarController extends Controller
         $car->is_automatic = $request->input('is_automatic');
         $car->engine = $request->input('engine');
         $car->number_of_doors = $request->input('number_of_doors');
-
         
         $car->save();
         return $car;
@@ -101,13 +99,8 @@ class CarController extends Controller
         $car->engine = $request->input('engine');
         $car->number_of_doors = $request->input('number_of_doors');
 
-        
-
-        
         $request->validate($rules);
-        dd($car);
         $car->save();
-
         return $car;
 
     }

@@ -14,10 +14,10 @@ class Car extends Model
             'mark' => 'required | min:2',
             'model' => 'required | min:2',
             'year' => 'required',
-            'max_speed' => 'required | min:1',
+            'max_speed' => 'numeric|min:20|max:300',
             'is_automatic' => 'required',
             'engine' => 'required',
-            'number_of_doors' => 'required | min:1'
+            'number_of_doors' => 'required | numeric|min:2|max:5'
         ];
 
 
@@ -26,8 +26,8 @@ class Car extends Model
     }
 
 
-    // mutator - niz u string kad bude stizao u bazu
-    public function setIsAutomaticMutator($value){
+    // mutator - kad boolean bude stizao u bazu
+    public function setIsAutomaticAttribute($value){
     	$this->attributes['is_automatic'] = (boolean)$value;
 
     }
